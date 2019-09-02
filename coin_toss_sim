@@ -1,0 +1,45 @@
+# end if r consecutive heads
+# end if s total tosses
+
+sim2 = function(r, s) {
+
+  numHeads = 0
+  numTosses = 0
+  while (numHeads<r & numTosses<s){
+
+    # Toss coin
+    numTosses = numTosses + 1
+    toss = runif(1, 0, 1)
+
+    # Evaluate
+    if (toss<0.5){
+      numHeads = numHeads + 1
+    } else {
+      numHeads = 0
+    }
+
+  }
+
+  return(numTosses)
+}
+
+
+simRunner = function(numTrials) {
+
+  trial = 0
+  sum = 0
+
+  while (trial < numTrials){
+    trial = trial + 1
+    sum = sum + sim2(3, 6)
+  }
+
+  averageNumTrials = sum/numTrials
+
+  cat("\nAvg: ", averageNumTrials, "\n")
+
+
+}
+
+
+sprintf(simRunner(1000000))
